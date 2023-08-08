@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
-import PlayerCard from "./PlayerCard";
-import { allPlayers as fetchAllPlayers, removePlayer } from "./helpers";
+import {useEffect, useState} from 'react';
+import PlayerCard from '../components/playerComponents/PlayerCard';
+import {allPlayers as fetchAllPlayers, removePlayer} from '../Helpers/helpers';
 
-export default function AllPlayers({ searchResults, newPlayer }) {
+export default function AllPlayers({searchResults, newPlayer}) {
   const [allPlayers, setAllPlayers] = useState([]);
   const [filteredPlayers, setFilteredPlayers] = useState([]);
 
@@ -12,7 +12,7 @@ export default function AllPlayers({ searchResults, newPlayer }) {
         const data = await fetchAllPlayers();
         setAllPlayers(data);
       } catch (error) {
-        console.error("Error fetching players:", error);
+        console.error('Error fetching players:', error);
       }
     };
     fetchData();
@@ -39,9 +39,12 @@ export default function AllPlayers({ searchResults, newPlayer }) {
   };
 
   return (
-    <div className="card-group">
+    <div className='card-group'>
       {filteredPlayers.map((player) => (
-        <div className="col-md-4 col-lg-3 mb-4" key={player.id}>
+        <div
+          className='col-md-4 col-lg-3 mb-4'
+          key={player.id}
+        >
           <PlayerCard
             player={player}
             removePlayer={handleRemovePlayer}

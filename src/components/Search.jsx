@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { BASE_URL } from "./helpers";
-export default function Search({ setSearchResults }) {
-  const [searchQuery, setSearchQuery] = useState("");
+import React, {useState} from 'react';
+import {BASE_URL} from '../Helpers/helpers';
+export default function Search({setSearchResults}) {
+  const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(false);
 
   const fetchAndFilterPlayers = async () => {
@@ -14,11 +14,11 @@ export default function Search({ setSearchResults }) {
           player.name.toLowerCase().includes(searchQuery.toLowerCase())
         );
       } else {
-        console.error("API response not successful:", responseData.error);
+        console.error('API response not successful:', responseData.error);
         return [];
       }
     } catch (error) {
-      console.error("Error fetching and filtering players:", error);
+      console.error('Error fetching and filtering players:', error);
       return [];
     }
   };
@@ -37,22 +37,22 @@ export default function Search({ setSearchResults }) {
       const matchedPlayers = await fetchAndFilterPlayers();
       setSearchResults(matchedPlayers);
     } catch (error) {
-      console.error("Error fetching and filtering players:", error);
+      console.error('Error fetching and filtering players:', error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div id="search-bar">
+    <div id='search-bar'>
       <h2>Search Players</h2>
       <form onSubmit={handleSearchSubmit}>
         <input
-          type="text"
+          type='text'
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button type="submit">Search</button>
+        <button type='submit'>Search</button>
       </form>
       {loading && <p>Loading...</p>}
     </div>

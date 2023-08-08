@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { addNewPlayer } from "./helpers";
+import React, {useState} from 'react';
+import {addNewPlayer} from '../Helpers/helpers';
 
-export default function NewPlayerForm({ addPlayer }) {
-  const [playerName, setPlayerName] = useState("");
-  const [playerBreed, setPlayerBreed] = useState("");
+export default function NewPlayerForm({addPlayer}) {
+  const [playerName, setPlayerName] = useState('');
+  const [playerBreed, setPlayerBreed] = useState('');
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const handleSubmit = async (e) => {
@@ -16,27 +16,30 @@ export default function NewPlayerForm({ addPlayer }) {
 
     try {
       await addNewPlayer(newPlayer);
-      setPlayerName("");
-      setPlayerBreed("");
+      setPlayerName('');
+      setPlayerBreed('');
       setShowSuccessMessage(true);
       setTimeout(() => {
         setShowSuccessMessage(false);
       }, 3000);
       addPlayer(newPlayer);
     } catch (error) {
-      console.error("Error adding player:", error);
+      console.error('Error adding player:', error);
     }
   };
 
   return (
-    <div className="new-player-form-container">
-      <h2 className="new-player-form-title">Add New Player</h2>
+    <div className='new-player-form-container'>
+      <h2 className='new-player-form-title'>Add New Player</h2>
       {showSuccessMessage && <p>New player added successfully!</p>}
-      <form className="new-player-form" onSubmit={handleSubmit}>
+      <form
+        className='new-player-form'
+        onSubmit={handleSubmit}
+      >
         <label>
           Name:
           <input
-            type="text"
+            type='text'
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
           />
@@ -44,12 +47,12 @@ export default function NewPlayerForm({ addPlayer }) {
         <label>
           Breed:
           <input
-            type="text"
+            type='text'
             value={playerBreed}
             onChange={(e) => setPlayerBreed(e.target.value)}
           />
         </label>
-        <button type="submit">Add Player</button>
+        <button type='submit'>Add Player</button>
       </form>
     </div>
   );

@@ -1,9 +1,9 @@
-import { singlePlayer, removePlayer } from "./helpers.js";
-import { useParams, useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import {singlePlayer, removePlayer} from '../../Helpers/helpers.js';
+import {useParams, useNavigate} from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
 
 export default function SinglePlayer() {
-  const { playerId } = useParams();
+  const {playerId} = useParams();
   const navigate = useNavigate();
 
   const [player, setPlayer] = useState(null);
@@ -15,7 +15,7 @@ export default function SinglePlayer() {
         const playerData = response.data.player;
         setPlayer(playerData);
       } else {
-        console.error("Error fetching player:", response.error);
+        console.error('Error fetching player:', response.error);
       }
     };
     fetchData();
@@ -25,12 +25,12 @@ export default function SinglePlayer() {
     try {
       const response = await removePlayer(playerId);
       if (response.success) {
-        navigate("/AllPlayers");
+        navigate('/AllPlayers');
       } else {
-        console.error("Error deleting player:", response.error);
+        console.error('Error deleting player:', response.error);
       }
     } catch (error) {
-      console.error("Error deleting player:", error);
+      console.error('Error deleting player:', error);
     }
   };
 
@@ -39,8 +39,11 @@ export default function SinglePlayer() {
   }
 
   return (
-    <div className="featured-player">
-      <img src={player.imageUrl} alt={player.name} />
+    <div className='featured-player'>
+      <img
+        src={player.imageUrl}
+        alt={player.name}
+      />
       <h4>Name: {player.name}</h4>
       <p>Breed: {player.breed}</p>
       <p>Status: {player.status}</p>
