@@ -1,9 +1,27 @@
 import React, { useState } from "react";
 import { BASE_URL } from "./helpers";
-
 export default function Search({ setSearchResults }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const fetchAndFilterPlayers = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/players`);
+      const responseData = await response.json();
+
+      if (responseData.success) {
+        return responseData.data.players.filter((player) =>
+          player.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      } else {
+        console.error("API response not successful:", responseData.error);
+        return [];
+      }
+    } catch (error) {
+      console.error("Error fetching and filtering players:", error);
+      return [];
+    }
+  };
 
   const handleSearchSubmit = async (e) => {
     e.preventDefault();
@@ -22,20 +40,6 @@ export default function Search({ setSearchResults }) {
       console.error("Error fetching and filtering players:", error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const fetchAndFilterPlayers = async () => {
-    const response = await fetch(`${BASE_URL}/players`);
-    const responseData = await response.json();
-
-    if (responseData.success) {
-      return responseData.data.players.filter((player) =>
-        player.name.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-    } else {
-      console.error("API response not successful:", responseData.error);
-      return [];
     }
   };
 
