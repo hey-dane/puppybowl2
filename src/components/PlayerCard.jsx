@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import FeaturedPlayer from "./FeaturedPlayer";
+import { useNavigate } from "react-router-dom";
 
 const modalStyles = {
   content: {
@@ -14,6 +15,7 @@ const modalStyles = {
 
 export default function PlayerCard({ player, removePlayer, setAllPlayers }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
@@ -27,6 +29,10 @@ export default function PlayerCard({ player, removePlayer, setAllPlayers }) {
     } catch (error) {
       console.error("Error removing player:", error);
     }
+  };
+
+  const handleNavigateToPlayer = () => {
+    navigate(`/players/${player.id}`);
   };
 
   return (
@@ -46,6 +52,9 @@ export default function PlayerCard({ player, removePlayer, setAllPlayers }) {
           onClick={() => handleRemovePlayer(player.id)}
         >
           Remove Player
+        </button>
+        <button className="btn btn-info" onClick={handleNavigateToPlayer}>
+          View Player
         </button>
       </div>
 

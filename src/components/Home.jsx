@@ -18,15 +18,15 @@ export default function Home() {
       <div id="add-player-container">
         <NewPlayerForm addPlayer={addPlayer} />
       </div>
-      {/* <div id="search-container">
+      <div id="search-container">
         <Search setSearchResults={setSearchResults} />
-      </div> */}
+      </div>
       <div id="players-container">
         <AllPlayers
           searchResults={searchResults}
           players={players}
           newPlayer={newPlayer}
-          onNewPlayerAdded={() => setNewPlayer(null)} // Reset newPlayer after it's processed
+          onNewPlayerAdded={() => setNewPlayer(null)}
         />
       </div>
     </div>
